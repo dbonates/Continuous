@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Continuous
 
 class ContinuousUITests: XCTestCase {
         
@@ -28,9 +29,22 @@ class ContinuousUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testAddItensOnTableview() {
+
+        
+        
+        let app = XCUIApplication()
+        let addButton = app.navigationBars["Master"].buttons["Add"]
+        addButton.tap()
+        addButton.tap()
+        addButton.tap()
+        addButton.tap()
+        addButton.tap()
+        XCTAssertGreaterThan(app.tables.staticTexts.count, 0)
+      
+
+        
+        
     }
     
 }
