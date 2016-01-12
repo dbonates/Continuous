@@ -32,4 +32,19 @@ class ContinuousTests: XCTestCase {
         }
     }
     
+    func testListShouldGrow() {
+        
+        let list = MasterViewController()
+        
+        //let currentListItensTotal = list.tableView.numberOfRowsInSection(0)
+        
+        let currentListItensTotal = list.objects.count
+        
+        list.insertNewObject()
+        
+        let currentListItensNewTotal = list.objects.count
+        
+        XCTAssertGreaterThan(currentListItensNewTotal,currentListItensTotal)
+    }
+    
 }
