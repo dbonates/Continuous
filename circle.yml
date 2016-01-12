@@ -2,4 +2,4 @@ machine:
   xcode:
     version: 7.2
   general:
-	build_dir: ContinuousTests
+    build_dir: ContinuousTests
