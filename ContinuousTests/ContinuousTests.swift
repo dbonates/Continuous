@@ -45,6 +45,49 @@ class ContinuousTests: XCTestCase {
         let currentListItensNewTotal = list.objects.count
         
         XCTAssertGreaterThan(currentListItensNewTotal,currentListItensTotal)
+        
     }
+    
+    func testBuildTableView() {
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        
+        XCTAssertNotNil(sb)
+        
+        let vc = sb.instantiateViewControllerWithIdentifier("MasterTableView") as! MasterViewController
+        
+        XCTAssertNotNil(vc)
+        
+        vc.performSelectorOnMainThread("loadView", withObject: nil, waitUntilDone: true)
+        
+        XCTAssertNotNil(vc.view)
+        
+        XCTAssertNotNil(vc.tableView)
+        
+        XCTAssertTrue(vc.conformsToProtocol(UITableViewDataSource))
+        
+        XCTAssertNotNil(vc.tableView.dataSource, "tableView should have a datasource")
+        
+        XCTAssertTrue(vc.conformsToProtocol(UITableViewDelegate))
+        
+        XCTAssertNotNil(vc.tableView.delegate)
+        
+        let expectation:Int = 3
+        
+        for _ in 1...3 {
+            vc.insertNewObjectOnTable(self)
+        }
+        
+        let numberOfRows = vc.tableView.numberOfRowsInSection(0)
+        
+        XCTAssertEqual(expectation, numberOfRows)
+        
+        let indexPath:NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+        
+        let cell = vc.tableView.cellForRowAtIndexPath(indexPath)
+        
+        XCTAssertEqual(cell?.reuseIdentifier, "Cell")
+    }
+
     
 }

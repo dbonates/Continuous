@@ -31,20 +31,16 @@ class ContinuousUITests: XCTestCase {
     
     func testAddItensOnTableview() {
 
-        
+        let numOfTaps:Int = 5
         
         let app = XCUIApplication()
         let addButton = app.navigationBars["Master"].buttons["Add"]
-        addButton.tap()
-        addButton.tap()
-        addButton.tap()
-        addButton.tap()
-        addButton.tap()
-        XCTAssertGreaterThan(app.tables.staticTexts.count, 0)
-      
-
         
+        for _ in 1...numOfTaps {
+            addButton.tap()
+        }
         
+        XCTAssertEqual(Int(app.tables.staticTexts.count), numOfTaps)
     }
     
 }
