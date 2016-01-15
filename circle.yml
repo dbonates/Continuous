@@ -1,5 +1,24 @@
 machine:
   xcode:
     version: 7.2
-general:
-  build_dir: ContinuousTests
+machine:
+  environment:
+    XCODE_SCHEME: Continuous
+    XCODE_WORKSPACE: CircleCI-Sample.xcworkspace
+    DEVELOPER_NAME: 'iPhone Distribution: Daniel Bonates'
+    APPNAME: Continuous.xcodeproj
+test:
+  override:
+    - xctool
+      -reporter pretty
+      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
+      -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
+      CODE_SIGNING_REQUIRED=NO
+      CODE_SIGN_IDENTITY=
+      PROVISIONING_PROFILE=
+      -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'
+      -sdk iphonesimulator
+      -project enjoei.xcodeproj
+      -scheme "Continuous"
+      build build-tests run-tests
+
