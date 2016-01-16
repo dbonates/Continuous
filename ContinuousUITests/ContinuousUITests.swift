@@ -43,4 +43,30 @@ class ContinuousUITests: XCTestCase {
         XCTAssertEqual(Int(app.tables.staticTexts.count), numOfTaps)
     }
     
+    
+    func testScrollPerformance() {
+        
+        let numOfTaps:Int = 20
+        
+        
+        let app = XCUIApplication()
+        let addButton = app.navigationBars["Master"].buttons["Add"]
+        
+        for _ in 1...numOfTaps {
+            addButton.tap()
+        }
+        
+        
+        self.measureBlock {
+
+            let tablesQuery = XCUIApplication().tables
+            
+            tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(3).swipeUp()
+            tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(8).swipeDown()
+            
+        }
+      
+        
+    }
+    
 }
