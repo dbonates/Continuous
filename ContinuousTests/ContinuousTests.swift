@@ -48,8 +48,8 @@ class ContinuousTests: XCTestCase {
         
     }
     
-    func testWillFail() {
-        XCTFail()
+    func testWillnotFail() {
+        XCTAssertTrue(true)
     }
     
     func testAppMainWindowIsLoaded() {
