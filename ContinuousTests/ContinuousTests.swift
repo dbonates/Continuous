@@ -48,6 +48,14 @@ class ContinuousTests: XCTestCase {
         
     }
     
+    func testAppMainWindowIsLoaded() {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewControllerWithIdentifier("RootViewManager") as! UISplitViewController
+        //vc.performSelectorOnMainThread("loadView", withObject: nil, waitUntilDone: true)
+        XCTAssertNotNil(vc)
+        //XCTAssertEqual(UIApplication.sharedApplication().keyWindow?.rootViewController, vc)
+    }
+    
     func testBuildTableView() {
         
         
