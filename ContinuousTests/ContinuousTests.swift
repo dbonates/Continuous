@@ -48,6 +48,10 @@ class ContinuousTests: XCTestCase {
         
     }
     
+    func testWillFail() {
+        XCTFail()
+    }
+    
     func testAppMainWindowIsLoaded() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewControllerWithIdentifier("RootViewManager") as! UISplitViewController
