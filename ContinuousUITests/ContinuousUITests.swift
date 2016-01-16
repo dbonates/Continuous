@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Continuous
 
 class ContinuousUITests: XCTestCase {
         
@@ -28,9 +29,44 @@ class ContinuousUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testAddItensOnTableview() {
+
+        let numOfTaps:Int = 5
+        
+        let app = XCUIApplication()
+        let addButton = app.navigationBars["Master"].buttons["Add"]
+        
+        for _ in 1...numOfTaps {
+            addButton.tap()
+        }
+        
+        XCTAssertEqual(Int(app.tables.staticTexts.count), numOfTaps)
+    }
+    
+    
+    func testScrollPerformance() {
+        
+        let numOfTaps:Int = 20
+        
+        
+        let app = XCUIApplication()
+        let addButton = app.navigationBars["Master"].buttons["Add"]
+        
+        for _ in 1...numOfTaps {
+            addButton.tap()
+        }
+        
+        
+        self.measureBlock {
+
+            let tablesQuery = XCUIApplication().tables
+            
+            tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(3).swipeUp()
+            tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(8).swipeDown()
+            
+        }
+      
+        
     }
     
 }
